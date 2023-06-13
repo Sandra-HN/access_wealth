@@ -1,27 +1,37 @@
-import { BrowserRouter } from "react-router-dom";
-
-import {
-  About,
-  Contact,
-  Experience,
-  Feedbacks,
-  Hero,
-  Navbar,
-  Tech,
-  Works,
-  StarsCanvas,
-} from "./components";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import PrivateRoutes from "./components/PrivateRoutes";
+import UnauthorizedPage from "./pages/UnauthorizedPage";
+import ErrorPage from "./pages/404";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import PublicHeader from "./components/PublicHeader";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <div className="relative z-0 bg-primary">
-        <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
-          <Navbar />
-        </div>
-      </div>
-    </BrowserRouter>
+    <Routes>
+      <Route exact path="/login" element={withPublicRoot(<LoginPage />)} />
+      <Route path="unauthorized" element={<UnauthorizedPage />} />
+
+      <Route element={<PrivateRoutes />}>
+        <Route exact path="/" element={withRoot(<HomePage />)} />
+      </Route>
+      <Route path="*" element={<ErrorPage />} />
+    </Routes>
   );
 };
-
+const withRoot = (Component) => (
+  <div className="min-h-screen bg-lmsWhite2 w-full">
+    <Header />
+    <div className="mx-auto max-w-full pb-12">{Component}</div>
+    <Footer />
+  </div>
+);
+const withPublicRoot = (Component) => (
+  <div className="min-h-screen bg-lmsWhite2 w-full">
+    <PublicHeader />
+    <div className="mx-auto max-w-full pt-16">{Component}</div>
+  </div>
+);
 export default App;

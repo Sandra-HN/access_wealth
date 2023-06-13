@@ -13,6 +13,7 @@ import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
 
 const ExperienceCard = ({ experience }) => {
+  
   return (
     <VerticalTimelineElement
       contentStyle={{

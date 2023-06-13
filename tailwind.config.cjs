@@ -1,8 +1,18 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ["./src/**/*.{js,jsx}"],
-  mode: "jit",
+
+const withMT = require("@material-tailwind/react/utils/withMT");
+module.exports = withMT({
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    content: [
+      "./packages/material-tailwind-react/src/components/**/*.{js,ts,jsx,tsx}",
+      "./packages/material-tailwind-react/src/theme/components/**/**/*.{js,ts,jsx,tsx}",
+      "./pages/**/*.{js,ts,jsx,tsx}",
+      "./components/**/*.{js,ts,jsx,tsx}",
+      "./redux/**/*.{js,ts,jsx,tsx}",
+      "./public/material-tailwind-html-v2.js",
+      "./node_modules/react-tailwindcss-select/dist/index.esm.js",
+    ],
     extend: {
       colors: {
         primary: "#050816",
@@ -19,9 +29,9 @@ module.exports = {
         xs: "450px",
       },
       backgroundImage: {
-        "hero-pattern": "url('/src/assets/herobg.png')",
+        "hero-pattern": "url('/src/assets/herombg.png')",
       },
     },
   },
   plugins: [],
-};
+});

@@ -1,11 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import { PowerIcon } from "@heroicons/react/24/solid";
 import { styles } from "../styles";
 import { navLinks } from "../constants";
-import { logo, menu, close } from "../assets";
+import { logo, menu, close, logoutIcon } from "../assets";
+import { useSelector } from "react-redux";
+import { removeToken } from "../utils/common";
+import Select from "react-tailwindcss-select";
+import { Typography } from "@material-tailwind/react";
 
 const Navbar = () => {
+  const AuthUser = useSelector((state) => state.auth.data);
+  const AuthUserLoading = useSelector((state) => state.auth.loading);
+
+  const [currency, setCurrency] = useState({
+    value: "AED",
+    label: "AED",
+    isSelected: true
+  },);
+
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -48,17 +61,64 @@ const Navbar = () => {
           </p>
         </Link>
 
-        <ul className="list-none hidden sm:flex flex-row gap-10">
+        <ul className="hidden sm:flex w-6/12  mb-0 mt-0 flex-row items-center justify-end gap-6">
           {navLinks.map((nav) => (
-            <li
-              key={nav.id}
+            <Typography
+              as="li"
               className={`${
                 active === nav.title ? "text-white" : "text-secondary"
-              } hover:text-white text-[18px] font-medium cursor-pointer`}
-              onClick={() => setActive(nav.title)}
+              } hover:text-white text-[18px] font-medium cursor-pointer w-full`}
+              key={nav.id}
+              onClick={async () => {
+                setActive(nav.title);
+                if (nav.id === "logout") {
+                  await removeToken();
+                  window.location.reload();
+                }
+              }}
             >
-              <a href={`#${nav.id}`}>{nav.title}</a>
-            </li>
+              {nav.id === "logout" ? (
+                <Typography
+                  className={`${
+                    active === nav.title ? "text-white" : "text-secondary"
+                  } hover:text-white text-[18px] font-medium cursor-pointer flex items-center justify-end gap-2 capitalize`}
+                >
+                  {AuthUser?.username}
+                  <PowerIcon className="h-5 w-5" />
+                </Typography>
+              ) : (
+                <div>
+                  <Select
+                    value={currency}
+                    onChange={(currency) => {
+                      setCurrency(currency);
+                    }}
+                    options={[
+                      {
+                        value: "AED",
+                        label: "AED",
+                        isSelected: currency === "AED",
+                      },
+                      {
+                        value: "USD",
+                        label: "USD",
+                        isSelected: currency === "USD",
+                      },
+                    ]}
+                    classNames={{
+                      // menuButton: (props) => {
+                      //   "block border border-white-100 text-sm text-primary rounded bg-tertiary";
+                      // },
+                      // listGroupLabel:"block text-green",
+                      // listItem: ({ isSelected }) => " hover:bg-tertiary/20",
+                      // menuButton:(props)=>"w-full text-black text-xl",
+                      // list: "bg-green max-h-96 overflow-auto",
+                      // listGroupLabel: "bg-black",
+                    }}
+                  />
+                </div>
+              )}
+            </Typography>
           ))}
         </ul>
 

@@ -6,7 +6,7 @@ import { styles } from "../styles";
 import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../utils/motion";
-
+import {github,linkedin}from "../assets";
 const Contact = () => {
   const formRef = useRef();
   const [form, setForm] = useState({
@@ -30,16 +30,18 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-
+    console.log(import.meta.env.VITE_APP_EMAILJS_SERVICE_ID);
+    console.log(import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY);
+    
     emailjs
       .send(
         import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
         {
           from_name: form.name,
-          to_name: "JavaScript Mastery",
+          to_name: "Sandra Hnaidy",
           from_email: form.email,
-          to_email: "sujata@jsmastery.pro",
+          to_email: "sandra.analysis@gmail.com",
           message: form.message,
         },
         import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
@@ -74,6 +76,30 @@ const Contact = () => {
       >
         <p className={styles.sectionSubText}>Get in touch</p>
         <h3 className={styles.sectionHeadText}>Contact.</h3>
+        <div className='relative inset-0 flex justify-end gap-3 m-3 card-img_hover'>
+            <div
+              onClick={() => window.open("https://www.linkedin.com/in/sandra-altheeb-hnaidy/", "_blank")}
+              className='white-background w-10 h-10 rounded-full flex justify-center items-center cursor-pointer'
+            >
+              <img
+                src={linkedin}
+                alt='LinkedIn'
+                className='w-full h-full object-contain'
+              />
+            </div>
+            <div
+              onClick={() => window.open("https://github.com/Sandra-HN", "_blank")}
+              className='w-10 h-10 rounded-full flex justify-center items-center cursor-pointer'
+            >
+              <img
+                src={github}
+                alt='Github'
+                className='w-full h-full object-contain'
+              />
+            </div>
+          </div>
+
+
 
         <form
           ref={formRef}
