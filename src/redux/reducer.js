@@ -28,28 +28,50 @@ const authReducer = (state = initialState.auth, action) => {
   }
 };
 
-const profileReducer = (state = initialState.profile, action) => {
+const portfolioReducer = (state = initialState.portfolio, action) => {
   switch (action.type) {
-    case types.PROFILE_FETCH:
+    case types.PORTFOLIO_FETCH:
       return {
         ...state,
         loading: true,
       };
-    case types.PROFILE_DATA:
+    case types.PORTFOLIO_DATA:
       return {
         ...state,
         loading: false,
         data: action.payload,
       };
-    case types.PROFILE_ERROR:
+    case types.PORTFOLIO_ERROR:
       return {
         ...state,
         loading: false,
       };
-    case types.PROFILE_RESET:
+    case types.PORTFOLIO_RESET:
       return {
         ...state,
         data: null,
+      };
+    case types.PORTFOLIO_VALUATION_FETCH:
+      return {
+        ...state,
+        valuationloading: true,
+      };
+    case types.PORTFOLIO_VALUATION_DATA:
+      return {
+        ...state,
+        valuationloading: false,
+        valuation: action.payload,
+      };
+    case types.PORTFOLIO_VALUATION_ERROR:
+      return {
+        ...state,
+        valuationloading: false,
+      };
+    case types.PORTFOLIO_VALUATION_RESET:
+      return {
+        ...state,
+        valuation: null,
+        valuationloading: false,
       };
     default:
       return state;
@@ -58,7 +80,7 @@ const profileReducer = (state = initialState.profile, action) => {
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  profile: profileReducer,
+  portfolio: portfolioReducer,
 });
 
 export default rootReducer;

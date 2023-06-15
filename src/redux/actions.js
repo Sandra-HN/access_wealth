@@ -1,13 +1,10 @@
-import {
-  removeAuthToken,
-  removeToken
-} from "../utils/common";
+import { removeUserToken, removeToken } from "../utils/common";
 
 /**
  * Actions
  */
 export * from "./auth_actions";
-export * from "./profile_actions";
+export * from "./portfolio_actions";
 /**
  * End Actions
  */
@@ -18,7 +15,7 @@ export * from "./profile_actions";
 export const handleError = (error, navigate, dispatch) => {
   if (error.code === 401) {
     removeToken();
-    removeAuthToken();
+    removeUserToken();
     navigate("/unauthorized");
   }
 };

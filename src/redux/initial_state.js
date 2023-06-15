@@ -5,14 +5,16 @@ const authState = {
   data: null,
 };
 
-const profileState = {
+const portfolioState = {
   loading: false,
   data: null,
+  Valuation: null,
+  valuationloading: false,
 };
 
 const initialState = {
   auth: authState,
-  profile: profileState,
+  portfolio: portfolioState,
 };
 
 export { initialState };

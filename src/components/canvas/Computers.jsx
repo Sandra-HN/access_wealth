@@ -21,7 +21,7 @@ const Computers = ({ isMobile }) => {
       <primitive
         object={computer.scene}
         scale={isMobile ? 0.5 : 0.7}
-        position={isMobile ? [-1, -3, -1.2] : [-0.75, -3, -1.2]}
+        position={isMobile ? [-1, -3, -5] : [-0.75, -3, -5]}
         rotation={[-0.01, -0.2, -0.1]}
       />
     </mesh>
@@ -41,7 +41,6 @@ const ComputersCanvas = () => {
     // Define a callback function to handle changes to the media query
     const handleMediaQueryChange = (event) => {
       setIsMobile(event.matches);
-     
     };
 
     // Add the callback function as a listener for changes to the media query
@@ -54,23 +53,22 @@ const ComputersCanvas = () => {
   }, []);
 
   return (
-    !isMobile && <Canvas
+    <Canvas
       frameloop="demand"
       shadows
       dpr={[1, 2]}
-      camera={{ position: [20, 3, 5], fov: 25 }}
+      camera={{ position: [20, -10, -12], fov: 30 }}
       gl={{ preserveDrawingBuffer: true }}
     >
-      
-        <Suspense fallback={<CanvasLoader />}>
-          <OrbitControls
-            enableZoom={false}
-            maxPolarAngle={Math.PI / 2}
-            minPolarAngle={Math.PI / 2}
-          />
-          <Computers isMobile={isMobile} />
-        </Suspense>
-      
+      <Suspense fallback={<CanvasLoader />}>
+        <OrbitControls
+          enableZoom={false}
+          maxPolarAngle={Math.PI / 2}
+          minPolarAngle={Math.PI / 2}
+        />
+        <Computers isMobile={isMobile} />
+      </Suspense>
+
       <Preload all />
     </Canvas>
   );

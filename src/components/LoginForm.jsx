@@ -45,7 +45,6 @@ function LoginForm() {
   };
   useEffect(() => {
     if (getToken()) {
-      debugger;
       dispatch(logoutAction(navigate));
     }
   }, []);

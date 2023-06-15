@@ -7,6 +7,7 @@ import ErrorPage from "./pages/404";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import PublicHeader from "./components/PublicHeader";
+import StockDetailPage from "./pages/StockDetailPage";
 
 const App = () => {
   return (
@@ -16,6 +17,11 @@ const App = () => {
 
       <Route element={<PrivateRoutes />}>
         <Route exact path="/" element={withRoot(<HomePage />)} />
+        <Route
+          exact
+          path="/stock-detail/:id"
+          element={withRoot(<StockDetailPage />)}
+        />
       </Route>
       <Route path="*" element={<ErrorPage />} />
     </Routes>
@@ -25,7 +31,6 @@ const withRoot = (Component) => (
   <div className="min-h-screen bg-lmsWhite2 w-full">
     <Header />
     <div className="mx-auto max-w-full pb-12">{Component}</div>
-    <Footer />
   </div>
 );
 const withPublicRoot = (Component) => (

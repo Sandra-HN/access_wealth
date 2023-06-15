@@ -7,12 +7,22 @@ export const getToken = () => {
 export const removeToken = () => {
   return localStorage.removeItem("token");
 };
-export const setAuthToken = (token) => {
-  return localStorage.setItem("authToken", token);
+export const setUserToken = (token) => {
+  return localStorage.setItem("user", JSON.stringify(token));
 };
-export const getAuthToken = () => {
-  return localStorage.getItem("authToken") || null;
+export const getUserToken = () => {
+  return localStorage.getItem("user") || null;
 };
-export const removeAuthToken = () => {
-  return localStorage.removeItem("authToken");
+export const removeUserToken = () => {
+  return localStorage.removeItem("user");
+};
+
+export const setSYS_CURToken = (token) => {
+  return localStorage.setItem("SYS_CUR", token);
+};
+export const getSYS_CURToken = () => {
+  return localStorage.getItem("SYS_CUR") || null;
+};
+export const removeSYS_CURToken = () => {
+  return localStorage.removeItem("SYS_CUR");
 };
