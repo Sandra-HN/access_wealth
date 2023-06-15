@@ -5,6 +5,7 @@ import {
   Hero,
   SecurityChart,
   TransactionTable,
+  GoToTop,
 } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -69,6 +70,7 @@ function HomePage() {
 
       <SecurityChart securityTimeSeries={securityTimeSeries} />
       <Footer />
+      <GoToTop />
     </Fragment>
   );
 }

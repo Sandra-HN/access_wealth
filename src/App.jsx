@@ -30,13 +30,13 @@ const App = () => {
 const withRoot = (Component) => (
   <div className="min-h-screen bg-lmsWhite2 w-full">
     <Header />
-    <div className="mx-auto max-w-full pb-12">{Component}</div>
+    <div className="mx-auto max-w-full mb-16">{Component}</div>
   </div>
 );
 const withPublicRoot = (Component) => (
   <div className="min-h-screen bg-lmsWhite2 w-full">
     <PublicHeader />
-    <div className="mx-auto max-w-full pt-16">{Component}</div>
+    <div className="mx-auto max-w-full pt-16 mb-16">{Component}</div>
   </div>
 );
 export default App;

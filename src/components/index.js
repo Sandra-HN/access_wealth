@@ -12,6 +12,7 @@ import LoginForm from "./LoginForm";
 import CanvasLoader from "./Loader";
 import SecurityChart from "./SecurityChart";
 import TransactionTable from "./TransactionTable";
+import GoToTop from "./GoToTop";
 export {
   Hero,
   Navbar,
@@ -25,4 +26,5 @@ export {
   StarsCanvas,
   SecurityChart,
   TransactionTable,
+  GoToTop,
 };

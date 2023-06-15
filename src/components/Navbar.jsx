@@ -148,7 +148,7 @@ const Navbar = () => {
           <img
             src={toggle ? close : menu}
             alt="menu"
-            className="w-[28px] h-[28px] object-contain"
+            className="h-5 w-5 sm:w-[28px] sm:h-[28px] object-contain"
             onClick={() => setToggle(!toggle)}
           />
 
@@ -159,18 +159,72 @@ const Navbar = () => {
           >
             <ul className="list-none flex justify-end items-start flex-1 flex-col gap-4">
               {navLinks.map((nav) => (
-                <li
-                  key={nav.id}
-                  className={`font-poppins font-medium cursor-pointer text-[16px] ${
+                <Typography
+                  as="li"
+                  className={`${
                     active === nav.title ? "text-white" : "text-secondary"
-                  }`}
-                  onClick={() => {
-                    setToggle(!toggle);
+                  } hover:text-white text-[18px] font-medium cursor-pointer w-full`}
+                  key={nav.id}
+                  onClick={async () => {
                     setActive(nav.title);
+                    if (nav.id === "logout") {
+                      dispatch(logoutAction(navigate));
+                    }
                   }}
                 >
-                  <a href={`#${nav.id}`}>{nav.title}</a>
-                </li>
+                  {nav.id === "logout" ? (
+                    <Typography
+                      className={`${
+                        active === nav.title ? "text-white" : "text-secondary"
+                      } hover:text-white text-[18px] font-medium cursor-pointer flex items-center justify-center gap-2 capitalize`}
+                    >
+                      <PowerIcon className="h-7 w-7" />
+                    </Typography>
+                  ) : (
+                    <div>
+                      <Select
+                        placeholder="System Currency"
+                        value={currency}
+                        onChange={async (crcy) => {
+                          setCurrency(crcy);
+                          await setSYS_CURToken(crcy.value);
+
+                          await dispatch(
+                            await getPortfolioValuationAction(navigate)
+                          );
+                        }}
+                        options={[
+                          {
+                            value: "AED",
+                            label: "AED",
+                            isSelected: currency === "AED",
+                          },
+                          {
+                            value: "USD",
+                            label: "USD",
+                            isSelected: currency === "USD",
+                          },
+                        ]}
+                        classNames={{
+                          menuButton: ({ isDisabled }) =>
+                            `flex justify-between bg-tertiary ${
+                              isDisabled ? "text-secondary" : "text-white"
+                            } w-full px-6   border border-white rounded-xl`,
+                          // listGroupLabel:"block text-green",
+                          listItem: ({ isSelected }) =>
+                            `py-2 px-6 rounded ${
+                              isSelected
+                                ? "bg-white/30"
+                                : "tertiary-transparent"
+                            } hover:bg-white/60`,
+                          menu: "absolute right-0 bg-tertiary/50 rounded border w-full ",
+                          // list: "bg-tertiary max-h-96 overflow-auto",
+                          // listGroupLabel: "bg-black",
+                        }}
+                      />
+                    </div>
+                  )}
+                </Typography>
               ))}
             </ul>
           </div>

@@ -7,6 +7,7 @@ import {
   Hero,
   SecurityChart,
   TransactionTable,
+  GoToTop,
 } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserToken } from "../utils/common";
@@ -57,7 +58,7 @@ function StockDetailPage() {
   return (
     <Fragment>
       <section
-        className={`relative w-full h-screen mx-auto bg-hero-pattern bg-cover bg-no-repeat bg-center`}
+        className={`py-12 relative w-full h-fit mx-auto bg-hero-pattern bg-cover bg-no-repeat bg-center`}
       >
         <SecurityValuations
           securityValuations={securityValuations}
@@ -66,15 +67,16 @@ function StockDetailPage() {
           navigate={navigate}
           fromHome={false}
         />
-
-        <TransactionTable
-          portfolioValuation={portfolioValuation}
-          showTransaction={showTransaction}
-          selectedValuation={selectedValuation}
-        />
-
-        <SecurityChart securityTimeSeries={securityTimeSeries} />
       </section>
+
+      <TransactionTable
+        portfolioValuation={portfolioValuation}
+        showTransaction={showTransaction}
+        selectedValuation={selectedValuation}
+      />
+
+      <SecurityChart securityTimeSeries={securityTimeSeries} />
+      <GoToTop />
     </Fragment>
   );
 }
