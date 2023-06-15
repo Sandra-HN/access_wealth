@@ -13,7 +13,7 @@ import {
 } from "../utils/common";
 import Select from "react-tailwindcss-select";
 import { Typography } from "@material-tailwind/react";
-import { getPortfolioValuationAction } from "../redux/actions";
+import { getPortfolioValuationAction, logoutAction } from "../redux/actions";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -86,8 +86,7 @@ const Navbar = () => {
               onClick={async () => {
                 setActive(nav.title);
                 if (nav.id === "logout") {
-                  await removeToken();
-                  window.location.reload();
+                  dispatch(logoutAction(navigate));
                 }
               }}
             >

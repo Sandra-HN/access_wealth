@@ -39,6 +39,7 @@ export const logoutAction = (navigate) => async (dispatch) => {
   removeToken();
   removeUserToken();
   removeSYS_CURToken();
+  navigate("/login");
 };
 export const logoutClickAction = (navigate) => async (dispatch) => {
   removeToken();
