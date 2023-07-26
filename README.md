@@ -1,4 +1,4 @@
-# Access Wealth
+# Case Study
 
 A Broker Company
 
